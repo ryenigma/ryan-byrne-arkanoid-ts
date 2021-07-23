@@ -17,8 +17,9 @@ import {
   BALL_SPEED,
   BALL_SIZE,
   BALL_STARTX,
-  BALL_STARTY
-} from './setup';
+  BALL_STARTY,
+  shrinkPaddleCheck
+  } from './setup';
 
 // Helpers
 import {createBricks} from './helpers';
@@ -60,13 +61,13 @@ function gameLoop(
   }
 
   collision.checkBallCollision(ball, paddle, view);
-  const collidingBrick = collision.isCollidingBricks(ball, bricks);
+  const collidingBrick = collision.isCollidingBricks(ball, bricks, paddle);
 
   if (collidingBrick) {
     score += 1;
     view.drawScore(score);
   }
-
+  
   // Game Over when ball leave playfield
   if (ball.pos.y > view.canvas.height) gameOver = true;
   // If game won, set gameOver and display win
@@ -111,4 +112,5 @@ function startGame(view: CanvasView) {
 
 // Create a new view
 const view = new CanvasView('#playField');
+shrinkPaddleCheck.checked = false;
 view.initStartButton(startGame);

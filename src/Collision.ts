@@ -1,8 +1,9 @@
 // Types
-import {Brick} from './sprites/Brick';
-import {Paddle} from './sprites/Paddle';
-import {Ball} from './sprites/Ball';
-import {CanvasView} from './view/CanvasView';
+import { Brick } from './sprites/Brick';
+import { Paddle } from './sprites/Paddle';
+import { Ball } from './sprites/Ball';
+import { CanvasView } from './view/CanvasView';
+import { shrinkPaddleCheck } from './setup';
 
 export class Collision {
   isCollidingBrick(ball: Ball, brick: Brick): boolean {
@@ -16,16 +17,21 @@ export class Collision {
     }
     return false;
   }
-  // Check ball collision with bricks
-  isCollidingBricks(ball: Ball, bricks: Brick[]): boolean {
-    let colliding = false;
 
+  // Check ball collision with bricks
+  isCollidingBricks(ball: Ball, bricks: Brick[], paddle: Paddle): boolean {
+    let colliding = false;
+    
     bricks.forEach((brick, i) => {
       if (this.isCollidingBrick(ball, brick)) {
         ball.changeYDirection();
-
+        
+        console.log(shrinkPaddleCheck.checked);
         if (brick.energy === 1) {
           bricks.splice(i, 1);
+          if (bricks.length % 5 == 0 && shrinkPaddleCheck.checked) {
+            paddle.width = paddle.width * 0.90;
+          }
         } else {
           brick.energy -= 1;
         }

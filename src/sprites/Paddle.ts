@@ -7,7 +7,7 @@ export class Paddle {
 
   constructor(
     private speed: number,
-    private paddleWidth: number,
+    public paddleWidth: number,
     private paddleHeight: number,
     private position: Vector,
     image: string
@@ -48,6 +48,10 @@ export class Paddle {
 
   get isMovingRight(): boolean {
     return this.moveRight;
+  }
+
+  set width(width: number) {
+    this.paddleWidth = width;
   }
 
   movePaddle(): void {
