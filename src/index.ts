@@ -18,7 +18,8 @@ import {
   BALL_SIZE,
   BALL_STARTX,
   BALL_STARTY,
-  shrinkPaddleCheck
+  shrinkPaddleCheck,
+  fasterPlayCheck
   } from './setup';
 
 // Helpers
@@ -67,7 +68,7 @@ function gameLoop(
     score += 1;
     view.drawScore(score);
   }
-  
+
   // Game Over when ball leave playfield
   if (ball.pos.y > view.canvas.height) gameOver = true;
   // If game won, set gameOver and display win
@@ -113,4 +114,5 @@ function startGame(view: CanvasView) {
 // Create a new view
 const view = new CanvasView('#playField');
 shrinkPaddleCheck.checked = false;
+fasterPlayCheck.checked = false;
 view.initStartButton(startGame);

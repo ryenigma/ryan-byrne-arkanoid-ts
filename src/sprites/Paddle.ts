@@ -1,4 +1,5 @@
 import {Vector} from '../types';
+import {fasterPlayCheck} from '../setup';
 
 export class Paddle {
   private paddleImage: HTMLImageElement = new Image();
@@ -6,13 +7,19 @@ export class Paddle {
   private moveRight: boolean;
 
   constructor(
-    private speed: number,
+    public speed: number,
     public paddleWidth: number,
     private paddleHeight: number,
     private position: Vector,
     image: string
   ) {
-    this.speed = speed;
+    // Challenge mode - increses paddle speed if option selected
+    if(fasterPlayCheck.checked) {
+      this.speed = speed * 1.25;
+    } else {
+      this.speed = speed;
+    }
+    
     this.paddleWidth = paddleWidth;
     this.paddleHeight = paddleHeight;
     this.position = position;

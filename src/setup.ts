@@ -29,6 +29,7 @@ export const BALL_STARTX = 500;
 export const BALL_STARTY = 400;
 
 export const shrinkPaddleCheck = <HTMLInputElement> document.getElementById('shrinkPaddle');
+export const fasterPlayCheck = <HTMLInputElement> document.getElementById('fasterPlay');
 
 export const BRICK_IMAGES: { [key: number]: string } = {
   1: RED_BRICK_IMAGE,

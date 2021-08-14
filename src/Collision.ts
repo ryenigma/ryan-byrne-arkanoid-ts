@@ -18,20 +18,22 @@ export class Collision {
     return false;
   }
 
-  // Check ball collision with bricks
+  // Check ball collision with bricks (contains shrinking paddle challenge)
   isCollidingBricks(ball: Ball, bricks: Brick[], paddle: Paddle): boolean {
     let colliding = false;
-    
+
     bricks.forEach((brick, i) => {
       if (this.isCollidingBrick(ball, brick)) {
         ball.changeYDirection();
-        
-        console.log(shrinkPaddleCheck.checked);
+
         if (brick.energy === 1) {
           bricks.splice(i, 1);
+
+          // Challenge Mode - Check to see if brick is destroyed and shrink paddle if option selected
           if (bricks.length % 5 == 0 && shrinkPaddleCheck.checked) {
             paddle.width = paddle.width * 0.90;
           }
+
         } else {
           brick.energy -= 1;
         }
@@ -40,6 +42,7 @@ export class Collision {
     })
     return colliding;
   }
+
   checkBallCollision(ball: Ball, paddle: Paddle, view: CanvasView): void {
     // 1. Check ball collision with paddle
     if (
